@@ -10,8 +10,18 @@ from functools import wraps
 
 load_dotenv()
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": os.getenv('CORS_ORIGINS', 'http://localhost:3000')}})
-
+CORS(
+    app,
+    resources={
+        r"/api/*": {
+            "origins": [
+                "https://medi-core-hms-111.vercel.app",
+                "http://localhost:3000"
+            ]
+        }
+    },
+    supports_credentials=True
+)
 # Database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
     'DATABASE_URL', 'postgresql+psycopg://postgres:postgres@localhost:5432/medicore'
