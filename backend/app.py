@@ -13,13 +13,11 @@ app = Flask(__name__)
 
 CORS(
     app,
-    origins=[
-        "https://medi-core-hms-111.vercel.app",
-        "https://medi-core-hms-111-3rjjr3nmc-kottebharath01s-projects.vercel.app",
-        "http://localhost:3000"
-    ],
-    allow_headers=["Content-Type", "Authorization"],
-    methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    resources={
+        r"/api/*": {
+            "origins": "*"
+        }
+    }
 )
 
 # Database configuration
