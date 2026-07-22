@@ -12,8 +12,15 @@ load_dotenv()
 app = Flask(__name__)
 CORS(
     app,
-    resources={r"/api/*": {"origins": "*"}},
-    supports_credentials=False
+    resources={
+        r"/api/*": {
+            "origins": [
+                "https://medi-core-hms-111-3rjjr3nmc-kottebharath01s-projects.vercel.app",
+                "http://localhost:3000"
+            ]
+        }
+    },
+    supports_credentials=True
 )
 # Database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
