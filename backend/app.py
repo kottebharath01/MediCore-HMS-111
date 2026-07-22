@@ -607,10 +607,12 @@ def delete_staff(sid):
     return jsonify({'message': 'Staff deleted'})
 
 
+# Initialize database for production (Gunicorn / Render)
+with app.app_context():
+    db.create_all()
+    seed_database()
+
 # ─── Boot ─────────────────────────────────────────────────────────────────────
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-        seed_database()
     app.run(debug=True, port=5000)
