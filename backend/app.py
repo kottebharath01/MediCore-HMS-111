@@ -31,6 +31,10 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = __import__('datetime').timedelta(hours=
 db = SQLAlchemy(app)
 jwt = JWTManager(app)
 
+with app.app_context():
+    db.create_all()
+    seed_database()
+
 # ─── Models ───────────────────────────────────────────────────────────────────
 
 class User(db.Model):
